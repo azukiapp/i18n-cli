@@ -1,6 +1,6 @@
 {
   "name": "i18n-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A lightweight (not asynchronous) i18n module for creating cli tools",
   "main": "lib/index.js",
   "scripts": {
