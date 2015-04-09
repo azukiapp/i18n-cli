@@ -1,0 +1,32 @@
+{
+  "name": "i18n-cli",
+  "version": "0.0.0",
+  "description": "A lightweight (not asynchronous) i18n module for creating cli tools",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "gulp test",
+    "deplay": "./node_modules/.bin/deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azukiapp/i18n-cli"
+  },
+  "keywords": [
+    "i18n",
+    "cli"
+  ],
+  "author": "Everton Ribeiro <everton@azukiapp.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/azukiapp/i18n-cli/issues"
+  },
+  "homepage": "https://github.com/azukiapp/i18n-cli",
+  "devDependencies": {
+    "azk-dev": "0.0.7"
+  },
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "printf": "^0.2.1",
+    "source-map-support": "^0.2.10"
+  }
+}
