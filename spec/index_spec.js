@@ -1,5 +1,5 @@
 import h from './spec_helper';
-import { I18n } from '../src';
+import { I18n } from '../';
 
 var chalk = require('chalk');
 
