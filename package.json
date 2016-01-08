@@ -22,11 +22,12 @@
   },
   "homepage": "https://github.com/azukiapp/i18n-cli",
   "devDependencies": {
-    "azk-dev": "0.0.11"
+    "azk-dev": "^0.2.1",
+    "gulp": "^3.8.11"
   },
   "dependencies": {
-    "chalk": "^1.0.0",
+    "chalk": "^1.1.1",
     "printf": "^0.2.1",
-    "source-map-support": "^0.2.10"
+    "source-map-support": "^0.4.0"
   }
 }

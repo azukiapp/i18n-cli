@@ -1,6 +1,6 @@
-var path   = require('path');
-var printf = require('printf');
-var chalk  = require('chalk');
+import path from 'path';
+import printf from 'printf';
+import chalk from 'chalk';
 
 function load(folder, locale) { // jshint ignore:line
   var file = path.join(folder, locale);
@@ -94,5 +94,4 @@ class I18n {
 // Support es6 and es5
 I18n.I18n       = I18n;
 I18n.default    = I18n;
-I18n.__esModule = true;
 module.exports  = I18n;

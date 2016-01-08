@@ -1,9 +1,17 @@
 import h from './spec_helper';
-import { I18n } from '../';
+import chalk from 'chalk';
 
-var chalk = require('chalk');
+// The same result expected
+import I18n from '../';
+import { I18n as I18nNotDefault } from '../';
+var I18nOldStyle = require('../');
 
 describe("Azk I18n class", function() {
+  it("should support import es6 and es5 styles", function() {
+    h.expect(I18n).to.equal(I18nNotDefault);
+    h.expect(I18n).to.equal(I18nOldStyle);
+  });
+
   describe("initialized with directory", function() {
     var i = new I18n({
       path   : h.fixture_path('locales'),
