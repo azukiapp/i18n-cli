@@ -1,5 +1,4 @@
 import h from './spec_helper';
-import chalk from 'chalk';
 
 // The same result expected
 import I18n from '../';
@@ -25,8 +24,47 @@ describe("Azk I18n class", function() {
     });
   });
 
+  describe("constructed with colors options", function() {
+    it("should support force supportsColor", function() {
+      var i18n = new I18n({
+        path   : h.fixture_path('locales'),
+        locale : 'en-US',
+        colors : true,
+        supportsColor: true,
+      });
+
+      var key = 'test.with_colors';
+      var formated = i18n.formatColors('${red}is red text${red.close}');
+      h.expect(i18n.t(key)).to.equal(formated);
+      h.expect(i18n.t(key)).to.not.equal('is red text');
+    });
+
+    it("should support a function for validate if supportsColor", function() {
+      var i18n = new I18n({
+        path   : h.fixture_path('locales'),
+        locale : 'en-US',
+        colors : true,
+        supportsColor: () => false,
+      });
+
+      var key = 'test.with_colors';
+      h.expect(i18n.t(key)).to.equal('is red text');
+    });
+
+    it("should disable colors anyway", function() {
+      var i18n = new I18n({
+        path   : h.fixture_path('locales'),
+        locale : 'en-US',
+        colors : false,
+      });
+
+      var key = 'test.with_colors';
+      h.expect(i18n.t(key)).to.equal('${red}is red text${red.close}');
+    });
+  });
+
   describe("initialized with dictionary", function() {
-    var t = new I18n({ dict: {
+    var i18n = new I18n({ dict: {
       key: { found: "foobar" },
       formated: "formated %s",
       array_value: ["item1", "item2"],
@@ -34,11 +72,13 @@ describe("Azk I18n class", function() {
         '*': { 'subkey': 'value default' },
         'linux': { 'subkey': 'value linux' },
       }
-    }}).t;
+    }});
+    var t = i18n.t;
 
     it("should return a key if not found value", function() {
       var key = "key.not.found";
-      h.expect(t(key)).to.equal(chalk.yellow(key));
+      var formated = i18n.formatColors('${yellow}%s${yellow.close}', key);
+      h.expect(t(key)).to.equal(formated);
     });
 
     it("should return a value for key", function() {

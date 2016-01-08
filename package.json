@@ -26,8 +26,11 @@
     "gulp": "^3.8.11"
   },
   "dependencies": {
-    "chalk": "^1.1.1",
-    "printf": "^0.2.1",
-    "source-map-support": "^0.4.0"
+    "lodash.clone": "^3.0.3",
+    "lodash.template": "^3.6.2",
+    "ansi-styles": "^2.1.0",
+    "source-map-support": "^0.4.0",
+    "sprintf-js": "^1.0.3",
+    "supports-color": "^3.1.2"
   }
 }

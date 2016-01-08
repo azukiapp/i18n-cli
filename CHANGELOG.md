@@ -7,3 +7,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * Enhancements
   * [Dependency] Updating `azk-dev` and `babel`;
+  * [Colors] Adding support to use colors;
+  * [Formater] Replacing `printf` for `sprintf-js`;

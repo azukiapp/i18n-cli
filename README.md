@@ -13,6 +13,9 @@ module.exports = {
     wildkey: {
         '*': { 'subkey': 'value default' },
         'linux': { 'subkey': 'value linux' },
+    },
+    colors: {
+        'red': '${red}red text${red.close}',
     }
 };
 ```
@@ -36,7 +39,9 @@ i18n.t('wildkey.linux.subkey');   // value linux
 i18n.t('wildkey.macosx.subkey');  // value default
 ```
 
-Check the [printf](https://www.npmjs.com/package/printf) to know what to use in "formated strings".
+Check the [sprintf-js](https://www.npmjs.com/package/sprintf-js) to know what to use in "formated strings".
+
+Check the [ansi-styles](https://www.npmjs.com/package/ansi-styles) to know what colors to use.
 
 ## License
 

@@ -1,6 +1,5 @@
 import path from 'path';
-import printf from 'printf';
-import chalk from 'chalk';
+import { sprintf as printf } from 'sprintf-js';
 
 function load(folder, locale) { // jshint ignore:line
   var file = path.join(folder, locale);
@@ -15,8 +14,21 @@ class I18n {
       this.dict = load(opts.path, opts.locale);
     }
 
+    // Support colors?
+    this.colors_enable = typeof(opts.colors) != 'undefined' ? opts.colors : true;
+    let supportsColor  = opts.supportsColor || function() {
+      return require('supports-color');
+    };
+
+    if (typeof(supportsColor) === 'function') {
+      this.__defineGetter__('supportsColor', supportsColor);
+    } else {
+      this.supportsColor = supportsColor;
+    }
+
     // Cache gets
     this.cache = {};
+    this.template_cache = {};
 
     // Alias to translate
     this.t = (...args) => {
@@ -48,14 +60,14 @@ class I18n {
       try {
         switch (typeof(result.value)) {
           case "string":
-            return printf(result.value, ...args);
+            return this._format(result, ...args);
           case "object":
             return result.value;
           default:
             return key;
         }
       } catch (err) {
-        var match, label = chalk.red("Translate error");
+        var match, label = this.formatColors("${red}Translate error${reset}");
         match = err.toString().match(/Error: missing key (.*)/);
         if (match) {
           return label + `: '${key}', missing: ${match[1]}`;
@@ -85,9 +97,43 @@ class I18n {
     }
 
     // Key to show in a error
-    key = chalk.yellow(typeof(key) == "string" ? key : key.join("."));
+    key = this.formatColors('${yellow}%s${yellow.close}', typeof(key) == "string" ? key : key.join("."));
 
     return { key, value };
+  }
+
+  _format(entry, ...args) {
+    if (this.colors_enable) {
+      if (!entry.builded) {
+        entry.builded = this._build(entry.value);
+      }
+      entry = entry.builded(this.colors);
+    } else {
+      entry = entry.value;
+    }
+    return printf(entry, ...args);
+  }
+
+  formatColors(entry, ...args) {
+    return printf(this._build(entry)(this.colors), ...args);
+  }
+
+  _build(value) {
+    let builded = this.template_cache[value];
+
+    if (!builded) {
+      if (!this._template) {
+        this._template = require('lodash.template');
+      }
+
+      builded = this.template_cache[value] = this._template(value);
+    }
+
+    return builded;
+  }
+
+  get colors() {
+    return require(this.supportsColor ? './colors' : './no-colors');
   }
 }
 
