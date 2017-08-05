@@ -6,7 +6,7 @@ function load(folder, locale) {
   return require(file);
 }
 
-export class I18n {
+class I18n {
   constructor(opts) {
     if (typeof(opts.dict) == 'object') {
       this.dict = opts.dict;
@@ -137,4 +137,7 @@ export class I18n {
   }
 }
 
-export { I18n as default };
+// Support es6 and es5
+I18n.I18n      = I18n;
+I18n.default   = I18n;
+module.exports = I18n;
