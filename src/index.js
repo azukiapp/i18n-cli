@@ -1,14 +1,14 @@
 import path from 'path';
 import { sprintf as printf } from 'sprintf-js';
 
-function load(folder, locale) { // jshint ignore:line
+function load(folder, locale) {
   var file = path.join(folder, locale);
   return require(file);
 }
 
-class I18n {
+export class I18n {
   constructor(opts) {
-    if (typeof(opts.dict) == "object") {
+    if (typeof(opts.dict) == 'object') {
       this.dict = opts.dict;
     } else if (opts.locale) {
       this.dict = load(opts.path, opts.locale);
@@ -59,15 +59,15 @@ class I18n {
     if (result.value) {
       try {
         switch (typeof(result.value)) {
-          case "string":
+          case 'string':
             return this._format(result, ...args);
-          case "object":
+          case 'object':
             return result.value;
           default:
             return key;
         }
       } catch (err) {
-        var match, label = this.formatColors("${red}Translate error${reset}");
+        var match, label = this.formatColors('${red}Translate error${reset}');
         match = err.toString().match(/Error: missing key (.*)/);
         if (match) {
           return label + `: '${key}', missing: ${match[1]}`;
@@ -86,7 +86,7 @@ class I18n {
   }
 
   _resolveKey(key) {
-    var keys   = (typeof(key) == "string") ? key.split('.') : key;
+    var keys   = (typeof(key) == 'string') ? key.split('.') : key;
     var value = this._find(keys);
 
     // Search again, now ancestors is *
@@ -97,7 +97,7 @@ class I18n {
     }
 
     // Key to show in a error
-    key = this.formatColors('${yellow}%s${yellow.close}', typeof(key) == "string" ? key : key.join("."));
+    key = this.formatColors('${yellow}%s${yellow.close}', typeof(key) == 'string' ? key : key.join('.'));
 
     return { key, value };
   }
@@ -137,7 +137,4 @@ class I18n {
   }
 }
 
-// Support es6 and es5
-I18n.I18n       = I18n;
-I18n.default    = I18n;
-module.exports  = I18n;
+export { I18n as default };

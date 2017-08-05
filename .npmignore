@@ -1,10 +1,7 @@
 .editorconfig
 .gitignore
-.jscsrc
-.jshintrc
+.eslintrc
 .npmignore
-gulpfile.js
-lib/spec
 node_modules
 spec/
 src/

@@ -45,7 +45,7 @@ Check the [ansi-styles](https://www.npmjs.com/package/ansi-styles) to know what 
 
 ## License
 
-"Azuki", "Azk" and the Azuki logo are copyright (c) 2013-2015 Azuki Serviços de Internet LTDA.
+"Azuki", "Azk" and the Azuki logo are copyright (c) 2013-2017 Azuki Serviços de Internet LTDA.
 
 i18n-cli is released under Apache 2 License.
 
